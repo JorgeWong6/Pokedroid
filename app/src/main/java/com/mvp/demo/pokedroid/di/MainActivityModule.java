@@ -1,6 +1,5 @@
 package com.mvp.demo.pokedroid.di;
 
-import android.app.Application;
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 
@@ -15,17 +14,10 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
- * Created by jatempa on 10/23/17.
+ * Created by atempa on 1/21/18.
  */
 @Module
-public class AppModule {
-
-    @Provides
-    @Singleton
-    Context provideContext(Application application) {
-        return application;
-    }
-
+public class MainActivityModule {
     @Provides
     @Singleton
     Presenter providePresenter(PokemonAdapter adapter, PokeapiService service) {
@@ -33,7 +25,7 @@ public class AppModule {
     }
 
     @Provides
-    @Singleton
+    
     PokemonAdapter providePokemonAdapter() {
         return new PokemonAdapter();
     }

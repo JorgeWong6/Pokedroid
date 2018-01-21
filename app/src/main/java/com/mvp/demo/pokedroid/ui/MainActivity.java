@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     @Inject
     Presenter presenter;
+    @Inject
     GridLayoutManager layoutManager;
 
     @Override
@@ -30,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         // Initialize
         recyclerView.setAdapter(presenter.getAdapter());
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new GridLayoutManager(this, 3);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -55,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        if (presenter != null)
+        if (outState == null)
             outState.putInt("offset", presenter.getOffset());
     }
 
@@ -63,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
-        if (presenter != null)
+        if (savedInstanceState != null)
             presenter.setOffset(savedInstanceState.getInt("offset"));
     }
 }
