@@ -1,17 +1,27 @@
 package com.mvp.demo.pokedroid.di;
 
-import com.mvp.demo.pokedroid.ui.MainActivity;
+import android.app.Application;
+
+import com.mvp.demo.pokedroid.App;
 
 import javax.inject.Singleton;
 
+import dagger.BindsInstance;
 import dagger.Component;
+import dagger.android.AndroidInjectionModule;
 
 /**
  * Created by jatempa on 10/23/17.
  */
 @Singleton
-@Component(modules = {AppModule.class})
+@Component(modules = {AndroidInjectionModule.class, AppModule.class, BuildersModule.class})
 public interface AppComponent {
-    void inject(MainActivity target);
-}
+    @Component.Builder
+    interface Builder {
+        @BindsInstance
+        Builder application(Application application);
+        AppComponent build();
+    }
 
+    void inject(App app);
+}

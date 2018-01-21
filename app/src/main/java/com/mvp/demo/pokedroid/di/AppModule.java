@@ -5,7 +5,6 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 
 import com.mvp.demo.pokedroid.model.PokeapiService;
-import com.mvp.demo.pokedroid.presenter.PokemonObserver;
 import com.mvp.demo.pokedroid.presenter.Presenter;
 import com.mvp.demo.pokedroid.presenter.PresenterImpl;
 import com.mvp.demo.pokedroid.ui.PokemonAdapter;
@@ -23,16 +22,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 @Module
 public class AppModule {
-    final String BASE_URL = "https://pokeapi.co/api/v2/";
-    private Application application;
-
-    AppModule(Application application) {
-        this.application = application;
-    }
+    private final String BASE_URL = "https://pokeapi.co/api/v2/";
 
     @Provides
     @Singleton
-    Context provideContext() {
+    Context provideContext(Application application) {
         return application;
     }
 
@@ -46,11 +40,6 @@ public class AppModule {
     @Singleton
     PokemonAdapter providePokemonAdapter() {
         return new PokemonAdapter();
-    }
-
-    @Provides
-    GridLayoutManager provideGridLayoutManager() {
-        return new GridLayoutManager(provideContext(), 3);
     }
 
     @Provides

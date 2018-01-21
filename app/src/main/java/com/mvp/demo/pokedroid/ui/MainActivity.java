@@ -6,31 +6,32 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.mvp.demo.pokedroid.R;
-import com.mvp.demo.pokedroid.di.App;
 import com.mvp.demo.pokedroid.presenter.Presenter;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.AndroidInjection;
 
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @Inject
     Presenter presenter;
-    @Inject
     GridLayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ((App) getApplication()).getComponent().inject(this);
+
         ButterKnife.bind(this);
         // Initialize
         recyclerView.setAdapter(presenter.getAdapter());
         recyclerView.setHasFixedSize(true);
+        layoutManager = new GridLayoutManager(this, 3);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
