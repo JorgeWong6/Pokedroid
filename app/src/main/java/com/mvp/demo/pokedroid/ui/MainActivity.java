@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.mvp.demo.pokedroid.R;
 import com.mvp.demo.pokedroid.presenter.Presenter;
+import com.mvp.demo.pokedroid.presenter.PresenterImpl;
 
 import javax.inject.Inject;
 
@@ -46,23 +47,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if (savedInstanceState == null)
-            presenter.fetchData(0);
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        if (outState == null)
-            outState.putInt("offset", presenter.getOffset());
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-
-        if (savedInstanceState != null)
-            presenter.setOffset(savedInstanceState.getInt("offset"));
+        if (PresenterImpl.offset == 0) {
+            PresenterImpl.readyToLoad = true;
+            presenter.fetchData(PresenterImpl.offset);
+        }
     }
 }

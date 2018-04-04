@@ -13,7 +13,6 @@ import io.reactivex.disposables.Disposable;
  */
 
 public class PokemonObserver implements Observer<PokemonList> {
-    private static final String TAG = "POKEDROID";
     private PokemonAdapter adapter;
 
     public PokemonObserver(PokemonAdapter adapter) {
@@ -22,7 +21,7 @@ public class PokemonObserver implements Observer<PokemonList> {
 
     @Override
     public void onSubscribe(Disposable d) {
-        Log.d(TAG, "Suscribed !");
+        Log.d(PresenterImpl.TAG, "Suscribed !");
     }
 
     @Override
@@ -32,11 +31,12 @@ public class PokemonObserver implements Observer<PokemonList> {
 
     @Override
     public void onError(Throwable e) {
-        Log.e(TAG, " onFailure: " + e.getMessage());
+        Log.e(PresenterImpl.TAG, " onFailure: " + e.getMessage());
     }
 
     @Override
     public void onComplete() {
-        Log.d(TAG, "Completed !");
+        Log.d(PresenterImpl.TAG, "Completed !");
+        PresenterImpl.readyToLoad = true;
     }
 }

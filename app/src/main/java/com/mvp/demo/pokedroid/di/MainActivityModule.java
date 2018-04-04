@@ -25,7 +25,6 @@ public class MainActivityModule {
     }
 
     @Provides
-    
     PokemonAdapter providePokemonAdapter() {
         return new PokemonAdapter();
     }

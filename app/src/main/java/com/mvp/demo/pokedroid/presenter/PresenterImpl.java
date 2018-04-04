@@ -1,5 +1,7 @@
 package com.mvp.demo.pokedroid.presenter;
 
+import android.util.Log;
+
 import com.mvp.demo.pokedroid.model.PokeapiService;
 import com.mvp.demo.pokedroid.model.PokemonList;
 import com.mvp.demo.pokedroid.ui.PokemonAdapter;
@@ -13,45 +15,37 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class PresenterImpl implements Presenter {
-    private int offset = 0;
-    private boolean readyToLoad = false;
+    static final String TAG = "POKEDEX";
+    private final int MAX = 20;
+    public static int offset = 0;
+    public static boolean readyToLoad = false;
     private PokemonAdapter adapter;
     private PokeapiService service;
 
     public PresenterImpl(PokemonAdapter adapter, PokeapiService service) {
         this.adapter = adapter;
         this.service = service;
-        readyToLoad = true;
     }
 
     @Override
     public void fetchData(int offset) {
-        Observable<PokemonList> observable = getService().getPokemonList(20, offset);
+        Log.i(TAG, " OFFSET " + offset);
+        Observable<PokemonList> observable = getService().getPokemonList(MAX, offset);
         observable.subscribeOn(Schedulers.io())
-                  .observeOn(AndroidSchedulers.mainThread())
-                  .subscribe(new PokemonObserver(getAdapter()));
-        readyToLoad = true;
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new PokemonObserver(getAdapter()));
     }
 
     @Override
     public void updateData(int visibleItemCount, int totalItemCount, int pastVisibleItems) {
         if (readyToLoad) {
             if ((visibleItemCount + pastVisibleItems) >= totalItemCount) {
+                Log.i(TAG, " Llegamos al final.");
                 readyToLoad = false;
-                offset += 20;
-                fetchData(getOffset());
+                offset += MAX;
+                fetchData(offset);
             }
         }
-    }
-
-    @Override
-    public void setOffset(int offset) {
-        this.offset = offset;
-    }
-
-    @Override
-    public int getOffset() {
-        return offset;
     }
 
     @Override
