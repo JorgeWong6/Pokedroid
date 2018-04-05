@@ -2,6 +2,8 @@ package com.mvp.demo.pokedroid.di;
 
 import com.mvp.demo.pokedroid.model.PokeapiService;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
@@ -13,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 @Module
 public class NetworkModule {
-    private final String BASE_URL = "https://pokeapi.co/api/v2/";
+    private final static String BASE_URL = "https://pokeapi.co/api/v2/";
 
     @Provides
     Retrofit provideRetrofit() {
@@ -25,6 +27,7 @@ public class NetworkModule {
     }
 
     @Provides
+    @Singleton
     PokeapiService provideApiService(Retrofit retrofit) {
         return retrofit.create(PokeapiService.class);
     }
