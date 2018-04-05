@@ -32,6 +32,7 @@ public class PresenterImpl implements Presenter {
         Log.i(TAG, " OFFSET " + offset);
         Observable<PokemonList> observable = getService().getPokemonList(MAX, offset);
         observable.subscribeOn(Schedulers.io())
+                .cache()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new PokemonObserver(getAdapter()));
     }

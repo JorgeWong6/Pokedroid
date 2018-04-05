@@ -31,7 +31,8 @@ public class PokemonObserver implements Observer<PokemonList> {
 
     @Override
     public void onError(Throwable e) {
-        Log.e(PresenterImpl.TAG, " onFailure: " + e.getMessage());
+        Log.e(PresenterImpl.TAG, "Error: " + e.getMessage());
+        PresenterImpl.readyToLoad = true;
     }
 
     @Override
