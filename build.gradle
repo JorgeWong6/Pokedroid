@@ -39,7 +39,7 @@ ext {
     daggerVersion = '2.14.1'
     butterknifeVersion = '8.8.1'
     retrofitVersion = '2.3.0'
-    glideVersion = '4.2.0'
+    glideVersion = '4.6.1'
     rxJavaVersion = "2.1.5"
     rxAndroidVersion = "2.0.1"
     //Test dependencies
