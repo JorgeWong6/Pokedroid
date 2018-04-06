@@ -2,16 +2,9 @@ package com.mvp.demo.pokedroid.presenter;
 
 import android.util.Log;
 
-import com.mvp.demo.pokedroid.api.PokemonService;
-import com.mvp.demo.pokedroid.model.PokemonList;
-import com.mvp.demo.pokedroid.ui.PokemonAdapter;
 import com.mvp.demo.pokedroid.viewmodel.PokemonViewModel;
 
 import javax.inject.Inject;
-
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by jatempa on 10/23/17.
