@@ -1,8 +1,11 @@
-package com.mvp.demo.pokedroid.di;
+package com.mvp.demo.pokedroid.di.component;
 
 import android.app.Application;
 
 import com.mvp.demo.pokedroid.App;
+import com.mvp.demo.pokedroid.di.module.AppModule;
+import com.mvp.demo.pokedroid.di.module.BuildersModule;
+import com.mvp.demo.pokedroid.di.module.NetworkModule;
 
 import javax.inject.Singleton;
 

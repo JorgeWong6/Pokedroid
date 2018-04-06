@@ -1,6 +1,6 @@
-package com.mvp.demo.pokedroid.di;
+package com.mvp.demo.pokedroid.di.module;
 
-import com.mvp.demo.pokedroid.model.PokeapiService;
+import com.mvp.demo.pokedroid.api.PokemonService;
 
 import javax.inject.Singleton;
 
@@ -28,7 +28,7 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    PokeapiService provideApiService(Retrofit retrofit) {
-        return retrofit.create(PokeapiService.class);
+    PokemonService provideApiService(Retrofit retrofit) {
+        return retrofit.create(PokemonService.class);
     }
 }

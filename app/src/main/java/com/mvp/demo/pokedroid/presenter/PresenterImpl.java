@@ -2,7 +2,7 @@ package com.mvp.demo.pokedroid.presenter;
 
 import android.util.Log;
 
-import com.mvp.demo.pokedroid.model.PokeapiService;
+import com.mvp.demo.pokedroid.api.PokemonService;
 import com.mvp.demo.pokedroid.model.PokemonList;
 import com.mvp.demo.pokedroid.ui.PokemonAdapter;
 
@@ -20,9 +20,9 @@ public class PresenterImpl implements Presenter {
     public static int offset = 0;
     public static boolean readyToLoad = false;
     private PokemonAdapter adapter;
-    private PokeapiService service;
+    private PokemonService service;
 
-    public PresenterImpl(PokemonAdapter adapter, PokeapiService service) {
+    public PresenterImpl(PokemonAdapter adapter, PokemonService service) {
         this.adapter = adapter;
         this.service = service;
     }
@@ -55,7 +55,7 @@ public class PresenterImpl implements Presenter {
     }
 
     @Override
-    public PokeapiService getService() {
+    public PokemonService getService() {
         return service;
     }
 }

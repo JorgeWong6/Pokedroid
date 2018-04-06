@@ -3,7 +3,7 @@ package com.mvp.demo.pokedroid;
 import android.app.Activity;
 import android.app.Application;
 
-import com.mvp.demo.pokedroid.di.DaggerAppComponent;
+import com.mvp.demo.pokedroid.di.component.DaggerAppComponent;
 
 import javax.inject.Inject;
 

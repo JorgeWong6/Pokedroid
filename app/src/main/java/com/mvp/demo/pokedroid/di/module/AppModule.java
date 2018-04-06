@@ -1,10 +1,10 @@
-package com.mvp.demo.pokedroid.di;
+package com.mvp.demo.pokedroid.di.module;
 
 import android.app.Application;
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 
-import com.mvp.demo.pokedroid.model.PokeapiService;
+import com.mvp.demo.pokedroid.api.PokemonService;
 import com.mvp.demo.pokedroid.presenter.Presenter;
 import com.mvp.demo.pokedroid.presenter.PresenterImpl;
 import com.mvp.demo.pokedroid.ui.PokemonAdapter;
@@ -28,7 +28,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    Presenter providePresenter(PokemonAdapter adapter, PokeapiService service) {
+    Presenter providePresenter(PokemonAdapter adapter, PokemonService service) {
         return new PresenterImpl(adapter, service);
     }
 

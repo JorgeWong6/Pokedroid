@@ -1,4 +1,4 @@
-package com.mvp.demo.pokedroid.di;
+package com.mvp.demo.pokedroid.di.module;
 
 import com.mvp.demo.pokedroid.ui.MainActivity;
 
