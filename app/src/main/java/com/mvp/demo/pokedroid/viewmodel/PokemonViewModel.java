@@ -13,14 +13,16 @@ import io.reactivex.schedulers.Schedulers;
 
 public class PokemonViewModel extends ViewModel {
     private PokemonRepository repository;
+    public static int offset = 0;
+    public static boolean readyToLoad = false;
 
     @Inject
     public PokemonViewModel(PokemonRepository repository) {
         this.repository = repository;
     }
 
-    public Observable<PokemonList> getPokemons(int offset) {
-        return repository.getPokemons(offset)
+    public Observable<PokemonList> getPokemons(int max, int offset) {
+        return repository.getPokemons(max, offset)
                          .subscribeOn(Schedulers.io())
                          .observeOn(AndroidSchedulers.mainThread());
     }

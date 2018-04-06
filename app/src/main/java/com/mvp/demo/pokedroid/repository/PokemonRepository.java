@@ -8,7 +8,6 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 
 public class PokemonRepository {
-    private static final int MAX = 20;
     private PokemonService service;
 
     @Inject
@@ -16,7 +15,7 @@ public class PokemonRepository {
         this.service = service;
     }
 
-    public Observable<PokemonList> getPokemons(int offset) {
-        return service.getPokemonList(MAX, offset);
+    public Observable<PokemonList> getPokemons(int max, int offset) {
+        return service.getPokemonList(max, offset);
     }
 }

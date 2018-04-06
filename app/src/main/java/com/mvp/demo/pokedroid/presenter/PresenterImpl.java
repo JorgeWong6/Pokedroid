@@ -18,8 +18,6 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class PresenterImpl implements Presenter {
-    static final String TAG = "POKEDEX";
-    private final int MAX = 20;
     public static int offset = 0;
     public static boolean readyToLoad = false;
     private PokemonObserver observer;
@@ -33,7 +31,7 @@ public class PresenterImpl implements Presenter {
 
     @Override
     public void fetchData(int offset) {
-        viewModel.getPokemons(offset).subscribe(observer);
+        viewModel.getPokemons(MAX, offset).subscribe(observer);
     }
 
     @Override

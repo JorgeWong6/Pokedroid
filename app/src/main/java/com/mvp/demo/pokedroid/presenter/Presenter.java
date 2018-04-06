@@ -7,6 +7,8 @@ import com.mvp.demo.pokedroid.ui.PokemonAdapter;
  */
 
 public interface Presenter {
+    String TAG = "POKEDEX";
+    int MAX = 20;
     void fetchData(int offset);
     void updateData(int visibleItemCount, int totalItemCount, int pastVisibleItems);
 }
