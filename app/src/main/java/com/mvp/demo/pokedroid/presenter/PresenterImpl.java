@@ -38,7 +38,7 @@ public class PresenterImpl implements Presenter {
     public void updateData(int visibleItemCount, int totalItemCount, int pastVisibleItems) {
         if (readyToLoad) {
             if ((visibleItemCount + pastVisibleItems) >= totalItemCount) {
-                Log.i(TAG, " Llegamos al final.");
+                Log.i(TAG, INFO_MESSAGE);
                 readyToLoad = false;
                 offset += MAX;
                 fetchData(offset);
