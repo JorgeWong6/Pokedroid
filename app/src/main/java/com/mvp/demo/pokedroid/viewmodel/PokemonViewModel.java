@@ -13,8 +13,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class PokemonViewModel extends ViewModel {
     private PokemonRepository repository;
-    public static int offset = 0;
-    public static boolean readyToLoad = false;
 
     @Inject
     public PokemonViewModel(PokemonRepository repository) {
