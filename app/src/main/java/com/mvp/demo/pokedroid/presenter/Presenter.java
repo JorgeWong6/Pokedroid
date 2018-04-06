@@ -9,6 +9,5 @@ import com.mvp.demo.pokedroid.ui.PokemonAdapter;
 public interface Presenter {
     void fetchData(int offset);
     void updateData(int visibleItemCount, int totalItemCount, int pastVisibleItems);
-    PokemonAdapter getAdapter();
 }
 

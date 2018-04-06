@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     Presenter presenter;
     @Inject
     GridLayoutManager layoutManager;
+    @Inject
+    PokemonAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         // Initialize
-        recyclerView.setAdapter(presenter.getAdapter());
+        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

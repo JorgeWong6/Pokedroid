@@ -22,13 +22,11 @@ public class PresenterImpl implements Presenter {
     private final int MAX = 20;
     public static int offset = 0;
     public static boolean readyToLoad = false;
-    private PokemonAdapter adapter;
     private PokemonObserver observer;
     private PokemonViewModel viewModel;
 
     @Inject
-    public PresenterImpl(PokemonAdapter adapter, PokemonObserver observer, PokemonViewModel viewModel) {
-        this.adapter = adapter;
+    public PresenterImpl(PokemonObserver observer, PokemonViewModel viewModel) {
         this.observer = observer;
         this.viewModel = viewModel;
     }
@@ -48,10 +46,5 @@ public class PresenterImpl implements Presenter {
                 fetchData(offset);
             }
         }
-    }
-
-    @Override
-    public PokemonAdapter getAdapter() {
-        return adapter;
     }
 }

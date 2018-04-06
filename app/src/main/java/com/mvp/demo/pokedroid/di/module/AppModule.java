@@ -31,8 +31,8 @@ public class AppModule {
 
     @Provides
     @Singleton
-    Presenter providePresenter(PokemonAdapter adapter, PokemonObserver observer, PokemonViewModel viewModel) {
-        return new PresenterImpl(adapter, observer, viewModel);
+    Presenter providePresenter(PokemonObserver observer, PokemonViewModel viewModel) {
+        return new PresenterImpl(observer, viewModel);
     }
 
     @Provides
