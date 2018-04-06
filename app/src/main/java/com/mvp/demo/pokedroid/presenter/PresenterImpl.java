@@ -5,6 +5,9 @@ import android.util.Log;
 import com.mvp.demo.pokedroid.api.PokemonService;
 import com.mvp.demo.pokedroid.model.PokemonList;
 import com.mvp.demo.pokedroid.ui.PokemonAdapter;
+import com.mvp.demo.pokedroid.viewmodel.PokemonViewModel;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -20,21 +23,19 @@ public class PresenterImpl implements Presenter {
     public static int offset = 0;
     public static boolean readyToLoad = false;
     private PokemonAdapter adapter;
-    private PokemonService service;
+    private PokemonObserver observer;
+    private PokemonViewModel viewModel;
 
-    public PresenterImpl(PokemonAdapter adapter, PokemonService service) {
+    @Inject
+    public PresenterImpl(PokemonAdapter adapter, PokemonObserver observer, PokemonViewModel viewModel) {
         this.adapter = adapter;
-        this.service = service;
+        this.observer = observer;
+        this.viewModel = viewModel;
     }
 
     @Override
     public void fetchData(int offset) {
-        Log.i(TAG, " OFFSET " + offset);
-        Observable<PokemonList> observable = getService().getPokemonList(MAX, offset);
-        observable.subscribeOn(Schedulers.io())
-                .cache()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new PokemonObserver(getAdapter()));
+        viewModel.getPokemons(offset).subscribe(observer);
     }
 
     @Override
@@ -52,10 +53,5 @@ public class PresenterImpl implements Presenter {
     @Override
     public PokemonAdapter getAdapter() {
         return adapter;
-    }
-
-    @Override
-    public PokemonService getService() {
-        return service;
     }
 }
