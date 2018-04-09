@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mvp.demo.pokedroid.R;
+import com.mvp.demo.pokedroid.presenter.Presenter;
 import com.mvp.demo.pokedroid.viewmodel.PokemonViewModel;
 
 import javax.inject.Inject;
@@ -30,6 +31,8 @@ public class PokemonFragment extends Fragment {
     ViewModelProvider.Factory viewModelFactory;
     @Inject
     PokemonAdapter adapter;
+    @Inject
+    Presenter presenter;
     private GridLayoutManager layoutManager;
 
     public PokemonFragment() {
@@ -72,28 +75,21 @@ public class PokemonFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         layoutManager = new GridLayoutManager(getContext(), 3);
         recyclerView.setLayoutManager(layoutManager);
+        presenter.setViewModel(viewModel);
 
-        if ((viewModel.getOffset() == 0) && (!viewModel.isReadyToLoad())) {
-            viewModel.setReadyToLoad(true);
-            viewModel.getPokemons(offset);
-        }
+        assert presenter != null;
+        presenter.fetchData(offset);
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (dy > 0) {
-                    int visibleItemCount = layoutManager.getChildCount();
-                    int totalItemCount = layoutManager.getItemCount();
-                    int pastVisibleItems = layoutManager.findFirstVisibleItemPosition();
-
-                    if (viewModel.isReadyToLoad()) {
-                        if ((visibleItemCount + pastVisibleItems) >= totalItemCount) {
-                            viewModel.setReadyToLoad(false);
-                            viewModel.setOffset(viewModel.getOffset() + PokemonViewModel.MAX);
-                            viewModel.getPokemons(viewModel.getOffset());
-                        }
-                    }
+                    presenter.updateData(
+                            layoutManager.getChildCount(),
+                            layoutManager.getItemCount(),
+                            layoutManager.findFirstVisibleItemPosition()
+                    );
                 }
             }
         });
