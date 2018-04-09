@@ -3,6 +3,8 @@ package com.mvp.demo.pokedroid.di.module;
 import android.content.Context;
 
 import com.mvp.demo.pokedroid.App;
+import com.mvp.demo.pokedroid.presenter.Presenter;
+import com.mvp.demo.pokedroid.presenter.PresenterImpl;
 import com.mvp.demo.pokedroid.ui.PokemonAdapter;
 
 import javax.inject.Singleton;
@@ -19,6 +21,12 @@ public class AppModule {
     @Provides
     Context provideContext(App application) {
         return application.getApplicationContext();
+    }
+
+    @Provides
+    @Singleton
+    Presenter providePresenter() {
+        return new PresenterImpl();
     }
 
     @Provides

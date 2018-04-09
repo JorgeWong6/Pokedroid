@@ -63,8 +63,10 @@ public class PokemonFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         assert getArguments() != null;
         int offset = getArguments().getInt(OFFSET);
+
         final PokemonViewModel viewModel = ViewModelProviders.of(this, viewModelFactory).get(PokemonViewModel.class);
 
         recyclerView.setAdapter(adapter);
