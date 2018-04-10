@@ -34,6 +34,7 @@ public class PokemonFragment extends Fragment {
     @Inject
     Presenter presenter;
     private GridLayoutManager layoutManager;
+    private PokemonViewModel viewModel;
 
     public PokemonFragment() {
         // Required empty public constructor
@@ -70,7 +71,7 @@ public class PokemonFragment extends Fragment {
         assert getArguments() != null;
         int offset = getArguments().getInt(OFFSET);
 
-        final PokemonViewModel viewModel = ViewModelProviders.of(this, viewModelFactory).get(PokemonViewModel.class);
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(PokemonViewModel.class);
 
         recyclerView.setAdapter(adapter);
         layoutManager = new GridLayoutManager(getContext(), 3);
