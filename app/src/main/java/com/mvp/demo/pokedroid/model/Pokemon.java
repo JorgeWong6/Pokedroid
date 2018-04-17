@@ -7,6 +7,8 @@ import android.arch.persistence.room.PrimaryKey;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import io.reactivex.annotations.NonNull;
+
 /**
  * Created by jatempa on 10/23/17.
  */
@@ -27,6 +29,15 @@ public class Pokemon {
     @SerializedName("url")
     @Expose
     private String url;
+
+    public Pokemon() {    }
+
+    public Pokemon(@NonNull int id, int number, String name, String url) {
+        this.id = id;
+        this.number = number;
+        this.name = name;
+        this.url = url;
+    }
 
     public int getId() {
         return id;
