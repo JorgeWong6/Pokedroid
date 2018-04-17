@@ -1,13 +1,40 @@
 package com.mvp.demo.pokedroid.model;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by jatempa on 10/23/17.
  */
-
+@Entity(tableName = "pokemons")
 public class Pokemon {
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    private int id;
+    @ColumnInfo(name = "number")
+    @SerializedName("number")
+    @Expose
     private int number;
+    @ColumnInfo(name = "name")
+    @SerializedName("name")
+    @Expose
     private String name;
+    @ColumnInfo(name = "url")
+    @SerializedName("url")
+    @Expose
     private String url;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

@@ -1,8 +1,10 @@
 package com.mvp.demo.pokedroid.di.module;
 
-import android.content.Context;
+import android.app.Application;
+import android.arch.persistence.room.Room;
 
-import com.mvp.demo.pokedroid.App;
+import com.mvp.demo.pokedroid.database.AppDatabase;
+import com.mvp.demo.pokedroid.database.PokemonDao;
 import com.mvp.demo.pokedroid.presenter.Presenter;
 import com.mvp.demo.pokedroid.presenter.PresenterImpl;
 import com.mvp.demo.pokedroid.ui.PokemonAdapter;
@@ -19,11 +21,6 @@ import dagger.Provides;
 public class AppModule {
 
     @Provides
-    Context provideContext(App application) {
-        return application.getApplicationContext();
-    }
-
-    @Provides
     @Singleton
     Presenter providePresenter() {
         return new PresenterImpl();
@@ -34,4 +31,16 @@ public class AppModule {
     PokemonAdapter providePokemonAdapter() {
         return new PokemonAdapter();
     }
+
+    // --- DATABASE INJECTION ---
+    
+    @Provides
+    @Singleton
+    AppDatabase provideDatabase(Application application) {
+        return Room.databaseBuilder(application, AppDatabase.class, AppDatabase.DB_NAME).build();
+    }
+
+    @Provides
+    @Singleton
+    PokemonDao providePokemonDao(AppDatabase database) { return database.getPokemonDao(); }
 }
