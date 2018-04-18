@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 public class PokemonViewModel extends ViewModel {
     private PokemonRepository repository;
@@ -29,26 +30,10 @@ public class PokemonViewModel extends ViewModel {
     public void getPokemons(int offset) {
         Log.d(TAG, "OFFSET " + offset);
         repository.getPokemons(MAX, offset)
-                .subscribe(new Observer<PokemonList>() {
+                .subscribe(new Consumer<PokemonList>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
-                        Log.d(TAG, "Suscribed !");
-                    }
-
-                    @Override
-                    public void onNext(PokemonList pokemonList) {
+                    public void accept(PokemonList pokemonList) throws Exception {
                         adapter.addToPokemonList(pokemonList.getResults());
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e(TAG, "Error: " + e.getMessage());
-                        readyToLoad = true;
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Log.d(TAG, "Completed !");
                         readyToLoad = true;
                     }
                 });

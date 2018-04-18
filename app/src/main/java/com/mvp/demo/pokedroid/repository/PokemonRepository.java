@@ -6,7 +6,7 @@ import com.mvp.demo.pokedroid.model.PokemonList;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import io.reactivex.Observable;
+import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -19,7 +19,7 @@ public class PokemonRepository {
         this.service = service;
     }
 
-    public Observable<PokemonList> getPokemons(int max, int offset) {
+    public Flowable<PokemonList> getPokemons(int max, int offset) {
         return service.getPokemonList(max, offset)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());

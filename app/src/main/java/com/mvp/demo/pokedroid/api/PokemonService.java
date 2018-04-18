@@ -2,7 +2,7 @@ package com.mvp.demo.pokedroid.api;
 
 import com.mvp.demo.pokedroid.model.PokemonList;
 
-import io.reactivex.Observable;
+import io.reactivex.Flowable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -12,5 +12,5 @@ import retrofit2.http.Query;
 
 public interface PokemonService {
     @GET("pokemon")
-    Observable<PokemonList> getPokemonList(@Query("limit") int limit, @Query("offset") int offset);
+    Flowable<PokemonList> getPokemonList(@Query("limit") int limit, @Query("offset") int offset);
 }
