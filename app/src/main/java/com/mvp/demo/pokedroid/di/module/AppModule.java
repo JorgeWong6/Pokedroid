@@ -3,10 +3,12 @@ package com.mvp.demo.pokedroid.di.module;
 import android.app.Application;
 import android.arch.persistence.room.Room;
 
+import com.mvp.demo.pokedroid.api.PokemonService;
 import com.mvp.demo.pokedroid.database.AppDatabase;
 import com.mvp.demo.pokedroid.database.PokemonDao;
 import com.mvp.demo.pokedroid.presenter.Presenter;
 import com.mvp.demo.pokedroid.presenter.PresenterImpl;
+import com.mvp.demo.pokedroid.repository.PokemonRepository;
 import com.mvp.demo.pokedroid.ui.PokemonAdapter;
 
 import javax.inject.Singleton;
@@ -43,4 +45,10 @@ public class AppModule {
     @Provides
     @Singleton
     PokemonDao providePokemonDao(AppDatabase database) { return database.getPokemonDao(); }
+
+    @Provides
+    @Singleton
+    PokemonRepository provideRepository(PokemonService service, PokemonDao dao) {
+        return new PokemonRepository(service, dao);
+    }
 }

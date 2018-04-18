@@ -6,14 +6,15 @@ import android.arch.persistence.room.Query;
 
 import com.mvp.demo.pokedroid.model.Pokemon;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.Flowable;
 
 @Dao
 public interface PokemonDao {
     @Insert
-    void insertAll(ArrayList<Pokemon> pokemons);
+    void insert(Pokemon pokemon);
 
     @Query("SELECT * FROM pokemons")
-    List<Pokemon> getAll();
+    Flowable<List<Pokemon>> getAll();
 }
