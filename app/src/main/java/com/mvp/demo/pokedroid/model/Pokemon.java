@@ -7,6 +7,8 @@ import android.arch.persistence.room.PrimaryKey;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 import io.reactivex.annotations.NonNull;
 
 /**
@@ -29,6 +31,8 @@ public class Pokemon {
     @SerializedName("url")
     @Expose
     private String url;
+    @ColumnInfo(name = "lastRefresh")
+    private Date lastRefresh;
 
     public Pokemon() {    }
 
@@ -70,5 +74,13 @@ public class Pokemon {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public Date getLastRefresh() {
+        return lastRefresh;
+    }
+
+    public void setLastRefresh(Date lastRefresh) {
+        this.lastRefresh = lastRefresh;
     }
 }
