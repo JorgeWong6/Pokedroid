@@ -41,6 +41,7 @@ public class PokemonViewModel extends ViewModel {
                       public void accept(List<Pokemon> pokemonList) throws Exception {
                           Log.d(TAG, "SIZE " + pokemonList.size());
                           adapter.addToPokemonList((ArrayList<Pokemon>) pokemonList);
+                          readyToLoad = true;
                       }
                   });
     }
